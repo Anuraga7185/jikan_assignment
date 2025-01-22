@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Animes</string>
+    <string name="anime_image">Anime_IMAGE</string>
+    <string name="num_episodes">Episodes    :- %s</string>
+    <string name="ratings">Ratings    :- %s</string>
+    <string name="genres">Genres    :- %s</string>
+    <string name="no_cast">NO CAST</string>
+</resources>
