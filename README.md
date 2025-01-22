@@ -1,1 +1,0 @@
-# jikan_assignment
