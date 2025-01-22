@@ -36,4 +36,11 @@ Limitation:-
 
 
 -> No offline Mode
+
+
+
 <img src="app/src/main/res/drawable/ss1.png" width="300" />
+
+<img src="app/src/main/res/drawable/ss2.png" width="300" />
+
+<img src="app/src/main/res/drawable/ss3.png" width="300" />
