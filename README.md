@@ -13,14 +13,26 @@ Features Implemented
 
 
 
--> Added Refresh feature to rerequest data from sever /n
+-> Added Refresh feature to rerequest data from sever 
+
+
 -> Added Validation to From Crasing App Due to network unavailability or server not able to respond
+
+
 -> Added Loading Feature till not able to fetch data from server
+
+
 -> Added Back Btn to move back to previous screen
 
 
 
+
+
       
-Limitation
+Limitation:- 
+
+
 -> No Image Caching
+
+
 -> No offline Mode
