@@ -1,13 +1,18 @@
 package com.jikan.anime.ui.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.SearchView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -25,6 +30,8 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
@@ -57,6 +64,10 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     protected void networkCalls() {
+        if (!isNetworkAvailable()) {
+            showErrorDialog(getString(R.string.no_internet_connection));
+            return;
+        }
         binding.progressBar.setVisibility(View.VISIBLE);
         makeServerCommunication(this.getCallback());
     }
@@ -72,9 +83,25 @@ public class DashboardActivity extends AppCompatActivity {
 
             @Override
             public void onHttpFailure() {
-                binding.progressBar.setVisibility(View.GONE);
+                runOnUiThread(() -> {
+                    binding.progressBar.setVisibility(View.GONE);
+                    showErrorDialog(getString(R.string.network_error));
+
+                });
             }
         };
+    }
+
+    protected boolean isNetworkAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = cm.getActiveNetworkInfo();
+        return networkInfo != null && networkInfo.isConnected();
+    }
+
+    public void showErrorDialog(String message) {
+        new AlertDialog.Builder(this).setTitle("Error").setMessage(message).setPositiveButton("Retry", (dialog, which) -> networkCalls()).setNegativeButton("Cancel", (dialog, which) -> {
+            DashboardActivity.this.finish();
+        }).setCancelable(false).show();
     }
 
     public void setAccessibility() {
@@ -90,7 +117,26 @@ public class DashboardActivity extends AppCompatActivity {
         }
         binding.recyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         binding.recyclerView.setAdapter(new GenericRecyclerAdapter<>(httpResponse.data, R.layout.anime_row_layout, this::createRecyclerRow));
+        binding.search.clearFocus();
+        binding.search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                List<AnimeDetail> filteredList = new ArrayList<>();
+                for (AnimeDetail data : httpResponse.data) {
+                    if (data.equals(newText)) {
+                        filteredList.add(data);
+                    }
+                }
+                binding.recyclerView.setAdapter(new GenericRecyclerAdapter<>(filteredList, R.layout.anime_row_layout, DashboardActivity.this::createRecyclerRow));
+                return false;
+            }
+
+        });
     }
 
     public String getAjax() {

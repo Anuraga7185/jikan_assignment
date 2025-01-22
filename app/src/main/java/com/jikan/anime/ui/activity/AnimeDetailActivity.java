@@ -86,7 +86,12 @@ public class AnimeDetailActivity extends DashboardActivity {
 
     @Override
     protected void networkCalls() {
+
         if (anime_id == -1) {
+            return;
+        }
+        if (!isNetworkAvailable()) {
+            showErrorDialog(getString(R.string.no_internet_connection));
             return;
         }
         binding.progressBar.setVisibility(View.VISIBLE);
@@ -105,7 +110,10 @@ public class AnimeDetailActivity extends DashboardActivity {
 
             @Override
             public void onHttpFailure() {
-                binding.progressBar.setVisibility(View.GONE);
+                runOnUiThread(() -> {
+                    binding.progressBar.setVisibility(View.GONE);
+                    showErrorDialog(getString(R.string.network_error));
+                });
             }
         };
     }

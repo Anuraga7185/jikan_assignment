@@ -1,5 +1,7 @@
 package com.jikan.anime.entity;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -34,4 +36,11 @@ public class AnimeDetail implements Serializable {
     public String year;
     public ArrayList<JikanGenres> genres;
 
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        if (obj instanceof String) {
+            return title.toLowerCase().toLowerCase().contains(String.valueOf(obj).toLowerCase());
+        }
+        return super.equals(obj);
+    }
 }
