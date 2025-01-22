@@ -36,7 +36,4 @@ Limitation:-
 
 
 -> No offline Mode
-
-![Screenshot 2025-01-23 024559.png](..%2F..%2FOneDrive%2FPictures%2FScreenshots%2FScreenshot%202025-01-23%20024559.png)
-![Screenshot 2025-01-23 024612.png](..%2F..%2FOneDrive%2FPictures%2FScreenshots%2FScreenshot%202025-01-23%20024612.png)
-![Screenshot 2025-01-23 024628.png](..%2F..%2FOneDrive%2FPictures%2FScreenshots%2FScreenshot%202025-01-23%20024628.png)
+<img src="app/src/main/res/drawable/ss1.png" width="300" />
