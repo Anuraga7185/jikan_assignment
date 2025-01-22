@@ -74,16 +74,16 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatRatingBar
+            <RatingBar
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:isIndicator="true"
                 android:numStars="5"
-                android:rating="4.0"
                 android:scaleX="0.7"
                 android:scaleY="0.7"
-                android:stepSize="0.5"
+                android:rating="9"
+                android:stepSize="1"
                 android:theme="@style/Widget.AppCompat.RatingBar" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

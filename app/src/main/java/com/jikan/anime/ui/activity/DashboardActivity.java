@@ -147,7 +147,10 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void createRecyclerRow(View view, AnimeDetail item, int position) {
         AnimeRowLayoutBinding layoutBinding = AnimeRowLayoutBinding.bind(view);
-        layoutBinding.ratingBar.setRating((float) item.score);
+        layoutBinding.ratingBar.post(() -> {
+            layoutBinding.ratingBar.setRating((float) item.score/2);
+        });
+        layoutBinding.ratingBar.invalidate();
         Glide.with(this).load(item.images.jpg.image_url).error(item.images.jpg.small_image_url).into(layoutBinding.animeImage);
         layoutBinding.animeName.setText(item.title);
         layoutBinding.episodes.setText(getString(R.string.num_episodes, String.valueOf(item.episodes)));

@@ -59,6 +59,9 @@ public class AnimeDetailActivity extends DashboardActivity {
         binding.episodes.setText(getApplicationContext().getString(R.string.num_episodes, String.valueOf(httpResponse.data.episodes)));
         binding.rating.setText(getString(R.string.ratings, String.valueOf(httpResponse.data.score)));
         binding.ratingBar.setRating((float) httpResponse.data.score);
+        binding.ratingBar.post(() -> {
+            binding.ratingBar.setRating((float) httpResponse.data.score / 2);
+        });
         //TO concat all genres Together
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(httpResponse.data.genres.stream().findFirst().orElse(new JikanGenres()).name);
