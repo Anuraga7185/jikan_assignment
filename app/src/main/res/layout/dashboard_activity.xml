@@ -12,36 +12,43 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
 
-    <ScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <LinearLayout
+        <ScrollView
+
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="wrap_content">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/curved_edit_box">
+                android:orientation="vertical">
 
-                <SearchView
-                    android:id="@+id/search"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:autofillHints="Doctor"
-                    android:iconifiedByDefault="false"
-                    android:queryHint="Search Here..">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/curved_edit_box">
 
-                </SearchView>
+                    <SearchView
+                        android:id="@+id/search"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:autofillHints="Doctor"
+                        android:iconifiedByDefault="false"
+                        android:queryHint="Search Here..">
+
+                    </SearchView>
+                </LinearLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-    </ScrollView>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </RelativeLayout>

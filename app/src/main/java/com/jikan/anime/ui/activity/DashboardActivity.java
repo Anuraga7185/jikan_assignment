@@ -109,9 +109,11 @@ public class DashboardActivity extends AppCompatActivity {
 
     public void setClickListeners() {
 
+
     }
 
     public void dataToView() {
+        binding.swipe.setOnRefreshListener(this::networkCalls);
         if (httpResponse == null) {
             return;
         }
@@ -135,8 +137,8 @@ public class DashboardActivity extends AppCompatActivity {
                 binding.recyclerView.setAdapter(new GenericRecyclerAdapter<>(filteredList, R.layout.anime_row_layout, DashboardActivity.this::createRecyclerRow));
                 return false;
             }
-
         });
+        binding.swipe.setRefreshing(false);
     }
 
     public String getAjax() {
